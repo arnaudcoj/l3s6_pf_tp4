@@ -36,7 +36,7 @@ Noeud "rouge" 1 (Noeud "rouge" 1 (Noeud "rouge" 1 Vide Vide) Vide) (Noeud "rouge
 
 --Q3    
 
-hauteurR :: (Num a) => Arbre coul val -> a
+hauteurR :: (Num a, Ord a) => Arbre coul val -> a
 hauteurR Vide = 0
 hauteurR (Noeud c v ag ad) = max' (1 + hauteurR ag) (1 + hauteurR ad)
   where max' a b = if a < b then b else a
