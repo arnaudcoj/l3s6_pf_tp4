@@ -29,10 +29,9 @@ Noeud "rouge" (-1) (Noeud "rouge" (-2) (Noeud "rouge" (-4) Vide Vide) Vide) (Noe
 Noeud "rouge" 1 (Noeud "rouge" 1 (Noeud "rouge" 1 Vide Vide) Vide) (Noeud "rouge" 1 Vide Vide)
 
 
-*Main> mfold (+) 0 test
+*Main> mfold (\x y z t -> y + z + t) 0 test
 10
-*Main> mfold (:) [] test
-[1,3,2,4]
+
 -}
 
 --Q3
