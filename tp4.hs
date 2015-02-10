@@ -36,11 +36,26 @@ Noeud "rouge" 1 (Noeud "rouge" 1 (Noeud "rouge" 1 Vide Vide) Vide) (Noeud "rouge
 
 --Q3    
 
-hauteurR :: (Num a, Ord a) => Arbre coul val -> a
+hauteurR :: Arbre coul val -> Int
 hauteurR Vide = 0
 hauteurR (Noeud c v ag ad) = max' (1 + hauteurR ag) (1 + hauteurR ad)
   where max' a b = if a < b then b else a
 
-tailleR :: (Num a) => Arbre coul val -> a
+tailleR :: Arbre coul val -> Int
 tailleR Vide = 0
 tailleR (Noeud c v ag ad) = 1 + hauteurR ag + hauteurR ad
+
+
+hauteurF :: Arbre coul val -> Int
+hauteurF = mfold (\x y z t -> (max z t) + 1) 0
+
+tailleF :: Arbre coul val -> Int
+tailleF  = mfold (\x y z t -> z + t + 1) 0
+
+--Q4
+
+peigneGauche :: [(c,a)] -> Arbre c a
+peigneGauche [] = Vide
+peigneGauche ((c,a):xs) = Noeud c a (peigneGauche xs) Vide
+
+--Q5
