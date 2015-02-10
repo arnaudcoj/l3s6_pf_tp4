@@ -5,6 +5,8 @@ Matthieu Caron
 Arnaud Cojez
 -}
 
+import Test.QuickCheck
+
 --Q1
 data Arbre coul val = Vide | Noeud coul val (Arbre coul val) (Arbre coul val) deriving Show
 
@@ -35,7 +37,6 @@ Noeud "rouge" 1 (Noeud "rouge" 1 (Noeud "rouge" 1 Vide Vide) Vide) (Noeud "rouge
 -}
 
 --Q3    
-
 hauteurR :: Arbre coul val -> Int
 hauteurR Vide = 0
 hauteurR (Noeud c v ag ad) = max' (1 + hauteurR ag) (1 + hauteurR ad)
@@ -53,9 +54,17 @@ tailleF :: Arbre coul val -> Int
 tailleF  = mfold (\x y z t -> z + t + 1) 0
 
 --Q4
-
 peigneGauche :: [(c,a)] -> Arbre c a
 peigneGauche [] = Vide
 peigneGauche ((c,a):xs) = Noeud c a (peigneGauche xs) Vide
 
 --Q5
+prop_hauteurPeigne xs = length xs == hauteurR (peigneGauche xs)
+
+--Q6
+--TODO
+
+--Q7
+estCompletR :: Arbre c a -> Bool
+estCompletR a = taille a == (2 ^ (hauteur - 1) -1)
+--Q8
