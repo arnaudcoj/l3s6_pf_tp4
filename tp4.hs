@@ -66,5 +66,35 @@ prop_hauteurPeigne xs = length xs == hauteurR (peigneGauche xs)
 
 --Q7
 estCompletR :: Arbre c a -> Bool
-estCompletR a = taille a == (2 ^ (hauteur - 1) -1)
+estCompletR Vide = True
+estCompletR (Noeud _ _ ag ad)
+ | tailleR ag == tailleR ad = estCompletR ag && estCompletR ad
+ | otherwise = False
+
+--estCompletF :: Arbre c a -> Bool
+--TOOOOOOOOOOOOOODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+testComplet = Noeud "rouge" 1 (Noeud "rouge" 2 (Noeud "rouge" 4 Vide Vide) (Noeud "rouge" 4 Vide Vide)) (Noeud "rouge" 3 (Noeud "rouge" 4 Vide Vide) (Noeud "rouge" 4 Vide Vide))
+
+
+testPairePasComplet = Noeud "rouge" 1 (Noeud "rouge" 2 (Noeud "rouge" 4 Vide Vide) (Noeud "rouge" 4 Vide Vide)) (Noeud "rouge" 3 Vide Vide)
+
+
+{-
+Tests:
+*Main> estCompletR test
+False
+*Main> estCompletR testComplet
+True
+-}
+
 --Q8
+
+--TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+--Q9
+
+complet :: Int -> [(c, a)] -> Arbre c a
+complet _ [] = error "complet : liste mal formée"
+complet 0 ((c,a):xs) = Noeud c a Vide Vide
+complet h l@((c,a):xs) = complet (h-1) l
